@@ -52,4 +52,7 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should return undefined when removeHead is called with no head', function() {
+    expect(linkedList.removeHead()).to.equal(undefined);
+  });
 });

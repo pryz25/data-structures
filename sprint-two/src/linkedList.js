@@ -17,14 +17,28 @@ var LinkedList = function() {
 
   list.removeHead = function() {
     // declare a variable, assign list.head.value to it
-    var output = list.head.value;
-    // reassign list.head to list.head.next
-    list.head = list.head.next;
-    // return variable
-    return output;
+    if (list.head === null) {
+      return undefined;
+    } else {
+      var output = list.head.value;
+      // reassign list.head to list.head.next
+      list.head = list.head.next;
+      // return variable
+      return output;
+    }
   };
 
   list.contains = function(target) {
+    list.current = list.head;// start with head value
+    while (list.current !== null) {// check if target matches value
+      if (list.current.value === target) {
+        return true;// if so return true
+      } else {
+        list.current = list.current.next;// if not go to next position
+      }
+    }
+    return false;  // if so return true
+    // return false in 'outside' scope
   };
 
   return list;
@@ -40,5 +54,7 @@ var Node = function(value) {
 };
 
 /*
- * Complexity: What is the time complexity of the above functions?
+ * addToTail is Constant
+ * removeHead is Constant
+ * contains is Linear
  */
