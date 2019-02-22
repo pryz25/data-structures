@@ -1,7 +1,8 @@
 
 
 // Instantiate a new graph
-var Graph = function() {
+var Graph = function() { 
+    
 };
 
 // Add a node to the graph, passing in the node's value.
