@@ -1,9 +1,9 @@
 var BinarySearchTree = function(value) {
-    var tree = Object.create(BinarySearchTree.prototype);
-    tree.value = value;
-    tree.left = null;
-    tree.right = null;
-    return tree;
+  var tree = Object.create(BinarySearchTree.prototype);
+  tree.value = value;
+  tree.left = null;
+  tree.right = null;
+  return tree;
 };
 
 
@@ -30,7 +30,7 @@ BinarySearchTree.prototype.insert = function(value) {
 
 BinarySearchTree.prototype.contains = function(value) {
   var current = this; // declare variable to represent current node
-  while (current.left !== null && current.right !== null) { // while loop left and right are not null
+  while (current !== null) { // while loop left and right are not null
     if (current.value === value) { // check if variable value equals input value
       return true; // if equals then true
     } else if (value > current.value) { // else check if value is > variable value
@@ -43,7 +43,13 @@ BinarySearchTree.prototype.contains = function(value) {
 };
 
 BinarySearchTree.prototype.depthFirstLog = function (cb) {
-  
+  cb(this.value); // run cb on tree value
+  if (this.left) { // if left is not null
+    this.left.depthFirstLog(cb); // tree is now tree left run DFL
+  } 
+  if (this.right) { // else if right is not null
+    this.right.depthFirstLog(cb); // tree is now right run DFL
+  } 
 };
 
 /*
