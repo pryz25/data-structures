@@ -27,9 +27,9 @@ Graph.prototype.removeNode = function(node) {
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  if (this.edgeList[fromNode] !== undefined) {// if fromNode is in edgeList...
-    for (let i = 0; i < this.edgeList[fromNode].length; i++) {// for each value in fromNode property...
-      if (this.edgeList[fromNode][i] === toNode) {// check if toNode value is in the array...
+  if (this.edgeList[fromNode] !== undefined) { // if fromNode is in edgeList...
+    for (let i = 0; i < this.edgeList[fromNode].length; i++) { // for each value in fromNode property...
+      if (this.edgeList[fromNode][i] === toNode) { // check if toNode value is in the array...
         return true;// return true
       }
     }
@@ -39,32 +39,39 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  if (this.nodeList[fromNode] === fromNode && this.nodeList[toNode] === toNode) {// check if from and to nodes are in graph
-    if (this.edgeList[fromNode] !== undefined) {// check if fromNode exists in list
-      this.edgeList[fromNode].push(toNode);// add toNode into value-array
-    } else {// if fromNode is not in edgelist
+  if (this.nodeList[fromNode] === fromNode && this.nodeList[toNode] === toNode) { // check if from and to nodes are in graph
+    if (this.edgeList[fromNode] !== undefined) { // check if fromNode exists in list
+      this.edgeList[fromNode].push(toNode); // add toNode into value-array
+    } else { // if fromNode is not in edgelist
       this.edgeList[fromNode] = [];  // declare value of fromNode as array
       this.edgeList[fromNode].push(toNode);  // add toNode into value
     }
-    if (this.edgeList[toNode] !== undefined) {// check if toNode exists in list
-      this.edgeList[toNode].push(fromNode);// add fromNode into value/array
-    } else {// if toNode is not in edgelist
-      this.edgeList[toNode] = [];// declare value of toNode as array
-      this.edgeList[toNode].push(fromNode);// add fromNode into array
+    if (this.edgeList[toNode] !== undefined) { // check if toNode exists in list
+      this.edgeList[toNode].push(fromNode); // add fromNode into value/array
+    } else { // if toNode is not in edgelist
+      this.edgeList[toNode] = []; // declare value of toNode as array
+      this.edgeList[toNode].push(fromNode); // add fromNode into array
     }
   }
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  // if edgeList with fromNode or toNode as key value pairs
-  // if fromNode = toNode then delete
-  // toNode = fromNode delete
+  for (var i = 0; i < this.edgeList[toNode].length; i++) { // look into toNode arrays in edge list
+    if (this.edgeList[toNode][i] === fromNode) { // find fromNode in toNode
+      this.edgeList[toNode].splice(i, 1); // delete fromNode
+    }
+  } 
+  for (var j = 0; j < this.edgeList[fromNode].length; j++) { // look into fromNode array
+    if (this.edgeList[fromNode][j] === toNode) { // find toNode in fromNode
+      this.edgeList[fromNode].splice(j, 1); // delete toNode
+    }
+  }
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-
+  
 };
 
 /*
