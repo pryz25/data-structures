@@ -22,7 +22,17 @@ Graph.prototype.contains = function(node) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
-
+  if (this.nodeList[node] !== undefined) { // if node is in nodeList...
+    delete this.nodeList[node]; // remove node from nodeList
+    delete this.edgeList[node]; // remove node from edgeList
+    for (let edge in this.edgeList) { // look up each other edgeList key...
+      for (let i = 0; i < this.edgeList[edge].length; i++) {
+        if (this.edgeList[edge][i] === node) {// go through each array looking for it
+          this.edgeList[edge].splice(i, 1);
+        }
+      }
+    }
+  } // delete if node is found
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -43,8 +53,8 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
     if (this.edgeList[fromNode] !== undefined) { // check if fromNode exists in list
       this.edgeList[fromNode].push(toNode); // add toNode into value-array
     } else { // if fromNode is not in edgelist
-      this.edgeList[fromNode] = [];  // declare value of fromNode as array
-      this.edgeList[fromNode].push(toNode);  // add toNode into value
+      this.edgeList[fromNode] = []; // declare value of fromNode as array
+      this.edgeList[fromNode].push(toNode); // add toNode into value
     }
     if (this.edgeList[toNode] !== undefined) { // check if toNode exists in list
       this.edgeList[toNode].push(fromNode); // add fromNode into value/array
@@ -71,11 +81,19 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-  
+  for (var key in this.nodeList) { // for each key in nodelist
+    cb(this.nodeList[key]);// run function through
+  }
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * addNode is constant
+ * contains is constant
+ * removeNode is linear
+ * addEdge is constant
+ * removeEdge is linear
+ * forEachNode is linear
  */
 
 
