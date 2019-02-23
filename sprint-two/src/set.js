@@ -11,12 +11,7 @@ setPrototype.add = function(item) {
 };
 
 setPrototype.contains = function(item) {
-  for(let key in this._storage) {// for every item in storage
-    if (key === item) {// if the item is found...
-      return true; // return true
-    }
-  }
-  return false; // return false
+  return (this._storage[item] !== undefined);
 };
 
 setPrototype.remove = function(item) {
@@ -25,4 +20,7 @@ setPrototype.remove = function(item) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * add is constant
+ * contains is constant
+ * remove is constant
  */
